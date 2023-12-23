@@ -1,0 +1,56 @@
+version: "3.4"
+
+services:
+  rabbitmq:
+    image: rabbitmq:3.12-management
+    hostname: ${RABBITMQ_HOST}
+    restart: always
+    environment:
+      - RABBITMQ_DEFAULT_USER=${RABBITMQ_USER}
+      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_PASSWORD}
+    ports:
+      - "${RABBITMQ_CONSOLE_PORT}:${RABBITMQ_CONSOLE_PORT}"
+      - "${RABBITMQ_AMQP_PORT}:${RABBITMQ_AMQP_PORT}"
+  postgres:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - "${POSTGRES_PORT}:${POSTGRES_PORT}"
+    volumes:
+      - ./database/credit_history.csv:/credit_history.csv
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+  data-processor:
+    build:
+      dockerfile: ./data_processor/Dockerfile
+    restart: always
+    stdin_open: true
+    tty: true
+    depends_on:
+      - rabbitmq
+      - postgres
+  prediction-models:
+    build:
+      dockerfile: ./prediction_models/Dockerfile
+    stdin_open: true
+    tty: true
+    depends_on:
+      - rabbitmq
+      - postgres
+      - data-processor
+  web-application:
+    build:
+      dockerfile: ./web_application/Dockerfile
+    restart: always
+    stdin_open: true
+    tty: true
+    ports:
+      - "8000:8000"
+    depends_on:
+      - rabbitmq
+      - postgres
+      - data-processor
+      - prediction-models

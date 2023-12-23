@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Models scores</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/page.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/table.css') }}">
+</head>
+<body>
+<div class="menu-container">
+    <div class="menu">
+        <h1>Models scores</h1>
+        <div class="table-container">
+            <table class="entityTable">
+                <thead>
+                <tr>
+                    <th>Scoring</th>
+                    {% for column_name in scores_json[scores_json.keys()|first] %}
+                    <th>{{ column_name }}</th>
+                    {% endfor %}
+                </tr>
+                </thead>
+                <tbody>
+                {% for row_name, row_data in scores_json.items() %}
+                <tr>
+                    <td>{{ row_name }}</td>
+                    {% for cell_data in row_data.values() %}
+                    <td>{{ cell_data }}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <a class="button-container" href="/"><input type="button" value="Back"></a>
+    </div>
+</div>
+</body>
+</html>

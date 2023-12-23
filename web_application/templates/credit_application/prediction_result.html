@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Prediction result</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/page.css') }}">
+</head>
+<body>
+<div class="menu-container">
+    <div class="menu">
+        <h1>Prediction result:</h1>
+        <h2>{{ result }}</h2>
+        <a class="button-container" href="/credit_application/profile"><input type="button" value="Back"></a>
+    </div>
+</div>
+</body>
+</html>

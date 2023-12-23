@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Credit predictions</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/page.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/table.css') }}">
+</head>
+<body>
+<div class="menu-container">
+    <div class="menu">
+        <h1>Credit predictions</h1>
+        <div class="table-container">
+            <table class="entityTable">
+                <thead>
+                <tr>
+                    {% for column_name in table_columns %}
+                    <th>{{ column_name }}</th>
+                    {% endfor %}
+                </tr>
+                </thead>
+                <tbody>
+                {% for row_data in table_rows %}
+                <tr>
+                    {% for value in row_data %}
+                    <td>{{ value }}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <a class="button-container" href="/"><input type="button" value="Back"></a>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Client profile</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/form.css') }}">
+</head>
+<body>
+<div class="formbold-main-wrapper">
+    <div class="formbold-form-wrapper">
+        <form action="/credit_application/profile" method="POST">
+            <div class="formbold-form-title">
+                <h2 class="">Client profile</h2>
+            </div>
+
+            <div class="formbold-input-flex">
+                <div>
+                    <label for="first_name" class="formbold-form-label">First name</label>
+                    <input type="text" name="first_name" id="first_name" class="formbold-form-input"/>
+                </div>
+                <div>
+                    <label for="last_name" class="formbold-form-label">Last name</label>
+                    <input type="text" name="last_name" id="last_name" class="formbold-form-input"/>
+                </div>
+            </div>
+
+            <div class="formbold-input-flex">
+                <div>
+                    <label for="age" class="formbold-form-label">Age</label>
+                    <input type="number" name="age" id="age" value="18" min="18" max="99" class="formbold-form-input"/>
+                </div>
+                <div>
+                    <label for="home_ownership" class="formbold-form-label">Home ownership</label>
+                    <select name="home_ownership" id="home_ownership" class="formbold-form-input">
+                        {% for option in home_ownership_enum %}
+                        <option value="{{ option.name }}">{{ option.value }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="formbold-input-flex">
+                <div>
+                    <label for="month_income" class="formbold-form-label">Month income</label>
+                    <input type="number" name="month_income" id="month_income" value="0" min="0" max="1000000000"
+                           class="formbold-form-input"/>
+                </div>
+                <div>
+                    <label for="employment_length" class="formbold-form-label">Employment length (years)</label>
+                    <input type="number" name="employment_length" id="employment_length" value="0" min="0" max="80"
+                           class="formbold-form-input"/>
+                </div>
+            </div>
+
+            <div class="formbold-input-flex">
+                <div>
+                    <label for="loan_intent" class="formbold-form-label">Loan intent</label>
+                    <select name="loan_intent" id="loan_intent" class="formbold-form-input">
+                        {% for option in loan_intent_enum %}
+                        <option value="{{ option.name }}">{{ option.value }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div>
+                    <label for="loan_interest_rate" class="formbold-form-label">Loan interest rate (%)</label>
+                    <input type="number" name="loan_interest_rate" id="loan_interest_rate" value="5" min="5" max="30"
+                           class="formbold-form-input"/>
+                </div>
+            </div>
+
+            <div class="formbold-input-flex">
+                <div>
+                    <label for="loan_amount" class="formbold-form-label">Loan amount</label>
+                    <input type="number" name="loan_amount" id="loan_amount" value="3000" min="3000" max="1000000"
+                           class="formbold-form-input"/>
+
+                </div>
+                <div>
+                    <label for="previous_loans" class="formbold-form-label">Number of previous loans</label>
+                    <input type="number" name="previous_loans" id="previous_loans" value="0" min="0" max="50"
+                           class="formbold-form-input"/>
+                </div>
+            </div>
+
+            <div class="formbold-input-flex">
+                <div>
+                    <label for="previous_default" class="formbold-form-label">Previous default</label>
+                    <select name="previous_default" id="previous_default" class="formbold-form-input">
+                        {% for option in previous_default_enum %}
+                        <option value="{{ option.name }}">{{ option.value }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div>
+                    <label for="loan_grade" class="formbold-form-label">Loan grade</label>
+                    <select name="loan_grade" id="loan_grade" class="formbold-form-input">
+                        {% for option in loan_grade_enum %}
+                        <option value="{{ option.name }}">{{ option.value }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="formbold-mb-3">
+                <label for="model" class="formbold-form-label">Prediction model</label>
+                <select name="model" id="model" class="formbold-form-input">
+                    {% for option in prediction_model_enum %}
+                    <option value="{{ option.name }}">{{ option.value }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="formbold-btn-container">
+                <a href="/"><input type="button" id="back" value="Back" class="formbold-btn"></a>
+                <input type="reset" id="reset" value="Reset" class="formbold-btn">
+                <button class="formbold-btn">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

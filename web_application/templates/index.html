@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/page.css') }}">
+</head>
+<body>
+<div class="menu-container">
+    <div class="menu">
+        <h1>Home</h1>
+        <a class="button-container" href="/credit_application/profile"><input type="button" value="Credit application"></a>
+        <a class="button-container" href="/credit_predictions"><input type="button" value="Credit predictions"></a>
+        <a class="button-container" href="/models_scores"><input type="button" value="Models scores"></a>
+    </div>
+</div>
+</body>
+</html>

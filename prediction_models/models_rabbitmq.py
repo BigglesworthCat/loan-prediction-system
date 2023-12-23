@@ -92,8 +92,8 @@ class RabbitMQConnection:
 
         return None
 
-def start_processing_requests(models_dict, scores_json):
-    def process_request_json(request_json):
+def start_processing_requests(models_dict: dict, scores_json: str):
+    def process_request_json(request_json: str) -> str:
         request = json.loads(request_json)
         request_variant = request.pop('request')
         if request_variant == 'predict':

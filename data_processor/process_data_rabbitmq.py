@@ -1,3 +1,5 @@
+from data_transformator import *
+
 import json
 import os
 import time
@@ -87,8 +89,8 @@ class RabbitMQConnection:
         return None
 
 
-def start_processing_requests(data_transformer):
-    def process_profile_json(profile_json):
+def start_processing_requests(data_transformer: DataTransformer):
+    def process_profile_json(profile_json: str):
         profile = pd.read_json(profile_json, orient='index').T
         transformed_profile = data_transformer.transform(profile, is_dataset=False)
         return json.dumps(transformed_profile.to_dict(orient='records')[0])

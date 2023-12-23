@@ -3,18 +3,18 @@ from models_rabbitmq import *
 import os
 import joblib
 
-models_path = os.getcwd() + '/models'
+resources_path = os.getcwd() + '/resources'
 
-scores_path = models_path + '/scores.json'
+scores_path = resources_path + '/scores.json'
 
 ending = '.joblib'
 
 models_dict = {}
 scores_json = ''
 
-for file_name in os.listdir(models_path):
+for file_name in os.listdir(resources_path):
     if file_name.endswith(ending):
-        file_path = os.path.join(models_path, file_name)
+        file_path = os.path.join(resources_path, file_name)
 
         loaded_model = joblib.load(file_path)
 

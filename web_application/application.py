@@ -1,14 +1,15 @@
 from utilities import *
+from application_rabbitmq import *
 
 import json
 
 from flask import Flask, render_template, request, redirect, url_for
 
+
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
 
 
-@app.route('/')
 @app.route('/')
 def index():
     return render_template('index.html')

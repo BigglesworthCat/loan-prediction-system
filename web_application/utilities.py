@@ -1,7 +1,6 @@
 from enums import *
 import pandas as pd
 
-from application_rabbitmq import *
 from database_connection import *
 
 

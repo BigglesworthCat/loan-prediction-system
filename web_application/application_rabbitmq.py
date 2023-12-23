@@ -39,6 +39,7 @@ pm_queue_arguments = {'x-message-ttl': message_ttl,
                       'x-dead-letter-exchange': pm_exchange_dlx,
                       'x-dead-letter-routing-key': pm_exchange_dlx}
 
+
 class RabbitMQConnection:
     _instance = None
 
@@ -127,7 +128,7 @@ class ProcessDataClient(object):
         self.channel.basic_publish(exchange='',
                                    routing_key=pd_queue,
                                    properties=BasicProperties(reply_to=self.callback_queue,
-                                                                   correlation_id=self.correlation_id),
+                                                              correlation_id=self.correlation_id),
                                    body=body)
         self.connection.process_data_events(time_limit=request_time_limit_seconds)
 
@@ -166,7 +167,7 @@ class PredictModelsClient(object):
         self.channel.basic_publish(exchange='',
                                    routing_key=pm_queue,
                                    properties=BasicProperties(reply_to=self.callback_queue,
-                                                                   correlation_id=self.correlation_id),
+                                                              correlation_id=self.correlation_id),
                                    body=body)
         self.connection.process_data_events(time_limit=request_time_limit_seconds)
 

@@ -5,7 +5,6 @@ import json
 
 from flask import Flask, render_template, request, redirect, url_for
 
-
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
 
@@ -46,7 +45,8 @@ def credit_application_profile():
 
 @app.route('/credit_application/result')
 def result():
-    return render_template('credit_application/prediction_result.html', result=request.args.get('result', 'Something went wrong...'))
+    return render_template('credit_application/prediction_result.html',
+                           result=request.args.get('result', 'Something went wrong...'))
 
 
 @app.route('/credit_predictions')
@@ -57,8 +57,16 @@ def credit_predictions():
                            table_rows=credit_predictions.values)
 
 
+@app.route('/models_weights')
+def models_weights():
+    request_json = {'request': 'models_weights'}
+    models_weights_json = json.loads(model_request(json.dumps(request_json)))
+    print(models_weights_json)
+    return render_template('/models_weights.html', models_weights_json=models_weights_json)
+
+
 @app.route('/models_scores')
-def models():
+def models_scores():
     request_json = {'request': 'scores'}
     scores_json = json.loads(model_request(json.dumps(request_json)))
     print(scores_json)

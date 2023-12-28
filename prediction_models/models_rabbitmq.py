@@ -92,7 +92,8 @@ class RabbitMQConnection:
 
         return None
 
-def start_processing_requests(models_dict: dict, scores_json: str):
+
+def start_processing_requests(models_dict: dict, models_weights_json: str, scores_json: str):
     def process_request_json(request_json: str) -> str:
         request = json.loads(request_json)
         request_variant = request.pop('request')
@@ -106,6 +107,8 @@ def start_processing_requests(models_dict: dict, scores_json: str):
                 response_json = json.dumps({"result": "Accepted"})
             else:
                 response_json = json.dumps({"result": "Denied"})
+        elif request_variant == 'models_weights':
+            response_json = models_weights_json
         elif request_variant == 'scores':
             response_json = scores_json
         return response_json

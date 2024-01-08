@@ -14,18 +14,18 @@
             <table class="entityTable">
                 <thead>
                 <tr>
-                    <th>Field</th>
-                    {% for column_name in models_weights_json[models_weights_json.keys()|first] %}
-                    <th>{{ column_name }}</th>
+                    <th>Fields</th>
+                    {% for model_name in models_weights_json.keys() %}
+                    <th>{{ model_name }}</th>
                     {% endfor %}
                 </tr>
                 </thead>
                 <tbody>
-                {% for row_name, row_data in models_weights_json.items() %}
+                {% for field_name in models_weights_json[models_weights_json.keys()|first] %}
                 <tr>
-                    <td>{{ row_name }}</td>
-                    {% for cell_data in row_data.values() %}
-                    <td>{{ cell_data }}</td>
+                    <td>{{ field_name }}</td>
+                    {% for model_data in models_weights_json.values() %}
+                    <td>{{ model_data[field_name] }}</td>
                     {% endfor %}
                 </tr>
                 {% endfor %}
